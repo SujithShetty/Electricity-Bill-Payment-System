@@ -1,0 +1,35 @@
+<?php
+$con= mysqli_connect('localhost','root','','dbms');
+
+$user_name=$_POST['username'];
+$password=$_POST['userpassword'];
+//$consumer_id=$_POST['consumer_id'];
+
+
+$query=
+"SELECT consumer_id,username,password
+FROM consumerlogin
+WHERE username='$user_name' AND password='$password'";
+
+$is_query_run=mysqli_query($con,$query);
+
+if($is_query_run)
+{
+	
+		
+			echo ' Valid Login<br>';
+			echo "   Logged IN<br>";
+			header("refresh:2;url=userlogin.html");
+		
+}
+		 else
+		 {
+			 echo "     invalid password";
+		 }
+		//echo''.$row['consumer_id'].''.$row['username'].''.$row['password'].'';
+		 
+	 	 
+
+
+
+?>
