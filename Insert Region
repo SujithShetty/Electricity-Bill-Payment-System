@@ -1,0 +1,25 @@
+<?php
+
+$con= mysqli_connect('localhost','root','','dbms');
+
+$region_id=$_POST['region_id'];
+$region_name=$_POST['region_name'];
+$rate=$_POST['rate'];
+
+$r=
+"
+INSERT INTO region (region_id,region_name,rate ) values ($region_id,'$region_name',$rate)
+
+";
+ 
+if(mysqli_query($con,$r))
+echo "     sucessful 1st query";
+
+
+
+header("refresh:6;url=emplogin1.php");
+
+
+
+
+?>
