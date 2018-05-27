@@ -1,0 +1,35 @@
+<?php
+
+
+$con= mysqli_connect('localhost','root','','dbms');
+
+$consumer_id=$_POST['consumer_id'];
+$consumer_name=$_POST['consumer_name'];
+$card_no=$_POST['card_no'];
+$PIN=$_POST['PIN'];
+$month=$_POST['month'];
+
+
+
+
+$sql="INSERT INTO card(consumer_id,consumer_name,card_no,PIN,month)
+    VALUES ('$consumer_id','$consumer_name','$card_no','$PIN','$month')" ;
+if(mysqli_query($con,$sql))
+{
+	echo  "inserted";
+    $query="UPDATE record SET status='PAID' WHERE consumer_id='$consumer_id' and month='$month'";
+    mysqli_query($con,$query);
+
+}
+else
+{
+	echo "not inserted";
+}
+
+
+ 
+
+
+
+//header("refresh:2;url=userlogin.html")
+?>
