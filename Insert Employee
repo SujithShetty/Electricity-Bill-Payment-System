@@ -1,0 +1,26 @@
+<?php
+
+$con= mysqli_connect('localhost','root','','dbms');
+
+$employee_name=$_POST['employee_name'];
+$employee_id=$_POST['employee_id'];
+$password=$_POST['password'];
+
+
+
+
+$query="SELECT * FROM employee  where  employee_id='$employee_id'";
+if(mysqli_query($con,$query))
+{
+    $query1="INSERT INTO employeelogin(employee_id,eusername,epassword)
+                values('$employee_id','$employee_name','$password') ";
+    if(mysqli_query($con,$query1)){
+    echo "Sucessful"; }
+    else{
+         echo "UNSucessful";
+    }
+}
+
+
+
+?>
