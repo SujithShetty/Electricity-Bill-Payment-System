@@ -1,0 +1,70 @@
+<?php
+$con= mysqli_connect('localhost','root','','dbms');
+$region_id=$_POST['region_id'];
+$employee_id=$_POST['employee_id'];
+$usage=$_POST['usage'];
+$consumer_id=$_POST['consumer_id'];
+$month=$_POST['month'];
+
+
+$query="INSERT INTO record(consumer_id,employee_id,consumer_usage,month,region_id,status) VALUES ('$consumer_id','$employee_id','$usage','$month','$region_id','NOTpaid')";
+
+if(mysqli_query($con,$query))
+{    
+  $q2="SELECT rate FROM region where region_id='$region_id'";
+ $q22=mysqli_query($con,$q2);
+ $row2=mysqli_fetch_array($q22,MYSQLI_ASSOC);
+ $rate=$row2['rate'];
+ echo "$rate";
+
+ $q3="SELECT consumer_usage FROM record where consumer_id='$consumer_id' and month ='$month'";
+ $q33=mysqli_query($con,$q3);
+ $row3=mysqli_fetch_array($q33,MYSQLI_ASSOC);
+ $usage=$row3['consumer_usage'];
+
+ $bill=($usage*$rate);
+
+     if($is_query_run=mysqli_query($con,$query))
+     {
+	 echo "UPDATED";
+
+	
+     }
+     if($is_query_run=mysqli_query($con,$q2))
+     {
+	  echo "UPDATED";
+	  echo "$rate";
+    }
+    if($is_query_run=mysqli_query($con,$q3))
+    {
+	 echo "UPDATED";
+	 
+    }
+$query1=
+"UPDATE record
+SET bill='$bill'
+WHERE consumer_id='$consumer_id' AND month='$month'";
+
+
+if($is_query_run=mysqli_query($con,$query1))
+{
+	 echo "UPDATED";
+header("refresh:2;url=empusage.html");
+	
+}
+else
+{
+	echo "     not exceuted";
+}
+
+
+}
+
+else
+{
+    echo"un";
+}
+
+
+
+?>
